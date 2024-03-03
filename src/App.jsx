@@ -1,34 +1,38 @@
-import {Hero,PopularProducts,SuperQuality,Services,SpecialOffer,CustomerReview,Subscribe,Footer} from './sections';
-import Nav from './components/Nav'
+// App.jsx
+import React, { useState } from 'react';
+import StudMap from './components/StudMap';
+import HomeMap from './components/HomeMap';
 
-const App = () => (
-  <main className="relative">
-      <Nav />
-      <section className="xl:padding-l wide:padding-r padding-b">
-        <Hero />
-      </section>
-      <section className="padding">
-        <PopularProducts />
-      </section>
-      <section className="padding">
-        <SuperQuality />
-      </section>
-      <section className="padding-x py-10">
-        <Services />
-      </section>
-      <section className="padding">
-        <SpecialOffer />
-      </section>
-      <section className="bg-pale-blue padding">
-        <CustomerReview />
-      </section>
-      <section className="padding-x sm:py-32 py-16 w-full">
-        <Subscribe />
-      </section>
-      <section className="bg-black text-white padding-x padding-t pb-8">
-        <Footer />
-      </section>
-  </main>
-);
+const App = () => {
+  const [selectedRole, setSelectedRole] = useState(null);
+
+  return (
+    <div className="flex flex-col h-screen ">
+      <h1 className="text-2xl font-semibold mb-8 px-7 py-7 font-montserrat">Bus Tracking System</h1>
+      <div className="flex px-7">
+        <button
+          className={`mr-4 px-4 py-2 rounded ${
+            selectedRole === 'student' ? 'bg-blue-500 text-white font-palanquin' : 'bg-gray-300'
+          }`}
+          onClick={() => setSelectedRole('student')}
+        >
+          Student
+        </button>
+        <button
+          className={`px-4 py-2 rounded ${
+            selectedRole === 'driver' ? 'bg-green-500 text-white font-palanquin' : 'bg-gray-300'
+          }`}
+          onClick={() => setSelectedRole('driver')}
+        >
+          Driver
+        </button>
+      </div>
+      <div className="flex-1 flex">
+        {selectedRole === 'student' ? <StudMap /> : null}
+        {selectedRole === 'driver' ? <HomeMap /> : null}
+      </div>
+    </div>
+  );
+};
 
 export default App;
